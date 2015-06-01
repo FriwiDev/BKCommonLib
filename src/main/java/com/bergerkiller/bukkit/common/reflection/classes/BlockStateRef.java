@@ -3,6 +3,7 @@ package com.bergerkiller.bukkit.common.reflection.classes;
 import java.util.Locale;
 
 import net.minecraft.server.v1_8_R3.CommandBlockListenerAbstract;
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.TileEntitySkull;
 
 import org.bukkit.Chunk;
@@ -46,8 +47,8 @@ public class BlockStateRef {
 	static {
 		// Initialize some instantiators
 		registerInst(new TileInstantiator("Sign") {
-			private final FieldAccessor<String[]> state_lines = STATE.getField("lines");
-			private final FieldAccessor<String[]> tile_lines = TILE.getField("lines");
+			private final FieldAccessor<IChatBaseComponent[]> state_lines = STATE.getField("lines");
+			private final FieldAccessor<IChatBaseComponent[]> tile_lines = TILE.getField("lines");
 
 			@Override
 			protected void apply(BlockState state, Object tile) {
@@ -102,15 +103,16 @@ public class BlockStateRef {
 	}
 
 	public static BlockState toBlockState(Block block) {
-		Object tileEntity = TileEntityRef.getFromWorld(block);
-		if (tileEntity != null) {
-			TileInstantiator inst = tileToInst.get(tileEntity);
-			if (inst != null) {
-				return inst.newInstance(block, tileEntity);
-			}
-		}
-		// All BlockState types REQUIRE a tile entity, just return the default BlockState here
-		return new CraftBlockState(block);
+//		Object tileEntity = TileEntityRef.getFromWorld(block);
+//		if (tileEntity != null) {
+//			TileInstantiator inst = tileToInst.get(tileEntity);
+//			if (inst != null) {
+//				return inst.newInstance(block, tileEntity);
+//			}
+//		}
+//		// All BlockState types REQUIRE a tile entity, just return the default BlockState here
+//		return new CraftBlockState(block);
+		return block.getState();
 	}
 
 	public static BlockState toBlockState(Object tileEntity) {

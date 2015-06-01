@@ -14,6 +14,8 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import com.bergerkiller.bukkit.common.conversion.ChatComponentConvertor;
+
 /**
  * A base Inventory that excludes the getting and setting of items<br>
  * Avoid using this class as much as possible, use the Bukkit versions instead!
@@ -159,7 +161,7 @@ public class IInventoryBase implements IInventory {
 
 	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
-		return IChatBaseComponent.ChatSerializer.a("{text:\""+getInventoryName()+"\"}");
+		return ChatComponentConvertor.convertTextToIChatBaseComponent(getInventoryName());
 	}
 
 	@Override
