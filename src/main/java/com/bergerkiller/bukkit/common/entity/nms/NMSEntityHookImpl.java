@@ -34,7 +34,7 @@ public class NMSEntityHookImpl implements NMSEntityHook {
 	}
 
 	@Override
-	public boolean c(EntityHuman human) {
+	public boolean e(EntityHuman human) {
 		return controller.onInteractBy(CommonNMS.getHuman(human));
 	}
 
@@ -122,8 +122,8 @@ public class NMSEntityHookImpl implements NMSEntityHook {
 	 * The super methods are unused
 	 */
 	@Override
-	public boolean super_c(EntityHuman human) {
-		return controller.getEntity().getHandle(NMSEntityHook.class).super_c(human);
+	public boolean super_e(EntityHuman human) {
+		return controller.getEntity().getHandle(NMSEntityHook.class).super_e(human);
 	}
 
 	@Override

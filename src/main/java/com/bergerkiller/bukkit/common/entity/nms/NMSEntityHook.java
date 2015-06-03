@@ -19,12 +19,12 @@ public interface NMSEntityHook {
 	/**
 	 * onInteractBy super
 	 */
-	public boolean super_c(EntityHuman human);
+	public boolean super_e(EntityHuman human);
 
 	/**
 	 * onInteractBy
 	 */
-	public boolean c(EntityHuman human);
+	public boolean e(EntityHuman human);
 
 	/**
 	 * onTick super

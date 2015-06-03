@@ -96,7 +96,7 @@ public class ClassBuilder {
 						try {
 							// Try to get the method in the superclass - prior
 							if (!SafeMethod.contains(superClass, methodName, method.getParameterTypes())) {
-								throw new RuntimeException("Could not find super method: " + superSig);
+								throw new RuntimeException("Could not find super method: " + superSig + " in "+interfaceClass.getName());
 							}
 							callback = new SuperCallbackSignature(superSig);
 						} catch (IllegalArgumentException ex) {
@@ -119,6 +119,7 @@ public class ClassBuilder {
 				}
 			}
 		} catch (Throwable t) {
+			t.printStackTrace();
 			throw new RuntimeException("Could not initialize Entity Class Builder for '" + superclass.getSimpleName() + "':", t);
 		}
 	}

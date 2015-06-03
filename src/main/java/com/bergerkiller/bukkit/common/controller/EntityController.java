@@ -70,7 +70,7 @@ public class EntityController<T extends CommonEntity<?>> extends CommonEntityCon
 	 * @return True if interaction occurred, False if not
 	 */
 	public boolean onInteractBy(HumanEntity interacter) {
-		return entity.getHandle(NMSEntityHook.class).super_c(CommonNMS.getNative(interacter)); 
+		return entity.getHandle(NMSEntityHook.class).super_e(CommonNMS.getNative(interacter)); 
 	}
 
 	/**

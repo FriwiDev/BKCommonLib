@@ -8,6 +8,7 @@ import net.minecraft.server.v1_8_R3.Chunk;
 import net.minecraft.server.v1_8_R3.Entity;
 import net.minecraft.server.v1_8_R3.EntityTrackerEntry;
 import net.minecraft.server.v1_8_R3.IInventory;
+import net.minecraft.server.v1_8_R3.TileEntity;
 import net.minecraft.server.v1_8_R3.World;
 
 import org.bukkit.Location;
@@ -246,6 +247,7 @@ public class CommonEntity<T extends org.bukkit.entity.Entity> extends ExtendedEn
 			type.nmsType.transfer(oldInstance, newInstance);
 			replaceEntity((Entity) newInstance);
 		} catch (Throwable t) {
+			t.printStackTrace();
 			throw new RuntimeException("Failed to set controller:", t);
 		}
 	}
@@ -335,11 +337,18 @@ public class CommonEntity<T extends org.bukkit.entity.Entity> extends ExtendedEn
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	private static boolean replaceInList(List list, Entity entity) {
-		ListIterator<Entity> iter = list.listIterator();
+		ListIterator<Object> iter = list.listIterator();
 		while (iter.hasNext()) {
-			if (iter.next().getId() == entity.getId())  {
-				iter.set(entity);
-				return true;
+			Object obj = iter.next();
+			if(obj instanceof Entity){
+				if (((Entity)obj).getId() == entity.getId())  {
+					iter.set(entity);
+					return true;
+				}
+			}else if(obj instanceof TileEntity){
+				CommonPlugin.LOGGER.log(Level.WARNING, "TileEntity is in Entity List!");
+			}else{
+				CommonPlugin.LOGGER.log(Level.WARNING, "Invalid Object is in Entity List!");
 			}
 		}
 		return false;
